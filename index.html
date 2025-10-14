@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalyst Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="dashboard">
+    <header>
+      <h1>AI-Assisted Catalyst Dashboard</h1>
+      <p class="subtitle">Sustainable Aviation Fuel Optimization</p>
+    </header>
+    <main>
+      <section class="card">
+        <h2>Literature Search</h2>
+        <div class="input-group">
+          <input type="text" id="searchQuery" placeholder="Search catalysts, metals, etc." class="modern-input">
+          <button onclick="searchLiterature()" class="modern-button">Search</button>
+        </div>
+        <ul id="results" class="results-list"></ul>
+      </section>
+      <section class="card">
+        <h2>Catalyst Optimization</h2>
+        <div class="input-group">
+          <input type="text" id="metal" placeholder="Metal/Promoter" class="modern-input">
+          <input type="number" id="iterations" placeholder="Iterations" value="3" min="1" class="modern-input">
+          <button onclick="runOptimization()" class="modern-button">Optimize</button>
+        </div>
+        <canvas id="yieldChart" width="400" height="200"></canvas>
+      </section>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+  
