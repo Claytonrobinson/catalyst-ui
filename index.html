@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI-Assisted Catalyst Dashboard</title>
   <link rel="stylesheet" href="styles.css">
+  <!-- Chart.js v4 stable CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 </head>
 <body>
@@ -16,21 +17,22 @@
     <main>
       <section class="card">
         <h2>Literature Search (Mock – Backend Pending)</h2>
+        <p style="color:#666; font-size:0.9em; margin-bottom:10px;">Waiting for Cameron's API endpoint – real fetch ready to swap in</p>
         <div class="input-group">
-          <input type="text" id="searchQuery" placeholder="Search catalysts, metals, etc." class="modern-input">
+          <input type="text" id="searchQuery" placeholder="e.g., nickel tungsten zirconia" class="modern-input">
           <button onclick="searchLiterature()" class="modern-button">Search</button>
         </div>
         <ul id="results" class="results-list"></ul>
       </section>
 
       <section class="card">
-        <h2>Catalyst Optimization (Mock)</h2>
+        <h2>Catalyst Optimization (Mock – Stable Visualization)</h2>
         <div class="input-group">
-          <input type="text" id="metal" placeholder="Metal/Promoter e.g. Ni-Mo" class="modern-input">
+          <input type="text" id="metal" placeholder="e.g., Ni-Mo, Ni-W" class="modern-input">
           <input type="number" id="iterations" placeholder="Iterations" value="8" min="1" max="20" class="modern-input">
           <button onclick="runOptimization()" class="modern-button">Run Optimization</button>
         </div>
-        <!-- WRAPPER DIV – this stops the stretch -->
+        <!-- Fixed-size wrapper to prevent resize loops -->
         <div class="chart-wrapper">
           <canvas id="yieldChart"></canvas>
         </div>
