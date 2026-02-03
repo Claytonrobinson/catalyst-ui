@@ -1,80 +1,94 @@
 function searchLiterature() {
-  const query = document.getElementById('searchQuery').value.trim();
+  const queryInput = document.getElementById('searchQuery');
   const results = document.getElementById('results');
+  const query = queryInput.value.trim();
 
   if (!query) {
-    results.innerHTML = '<li>Please enter a search query</li>';
+    results.innerHTML = '<li>Enter a query to search (mock mode)</li>';
     return;
   }
 
-  results.innerHTML = '<li>Loading... (mock mode)</li>';
+  results.innerHTML = '<li>Loading... (mock simulation)</li>';
 
+  // Fake delay for realism
   setTimeout(() => {
-    results.innerHTML = `
-      <li><strong>Mock: AI-Screened Ni-W/ZrO₂ for SAF</strong> (2024) - Bayesian opt boosted C10+ yields</li>
-      <li><strong>Mock: Polymetallic Oxides Hydrodeoxygenation</strong> (2023) - Ni promoter on WO₃/ZrO₂</li>
-      <li><strong>Mock: ML for Catalyst Optimization</strong> (${query} match) - Higher heating value improvement</li>
-    `;
-  }, 800);
+    // Project-relevant mock results (filtered loosely)
+    const mocks = [
+      { title: "AI-Screened Ni-W/ZrO₂ Catalysts for Biomass to SAF", snippet: "Bayesian optimization increased C10+ fraction by 25% in oligosaccharide upgrading.", year: 2024 },
+      { title: "Brønsted/Lewis Acid Polymetallic Oxides on Zirconia Support", snippet: "Ni with secondary promoter shows high hydrogenation/deoxygenation selectivity.", year: 2023 },
+      { title: "Machine Learning Accelerated Catalyst Design for Sustainable Jet Fuel", snippet: "Screening transition metals for WO₃-based systems.", year: 2025 },
+      { title: "Two-Step Hydrothermal Conversion of Switchgrass and Miscanthus", snippet: "Dilute acid hydrolysis + catalytic upgrading to C5-C16 hydrocarbons.", year: 2024 }
+    ];
+
+    const filtered = mocks.filter(m => 
+      m.title.toLowerCase().includes(query.toLowerCase()) || 
+      m.snippet.toLowerCase().includes(query.toLowerCase())
+    );
+
+    results.innerHTML = filtered.length > 0 
+      ? filtered.map(m => `<li><strong>${m.title}</strong> (${m.year})<br>${m.snippet}</li>`).join('')
+      : '<li>No matching mock results – try "nickel" or "bayesian"</li>';
+  }, 900);
 }
 
 function runOptimization() {
   const canvas = document.getElementById('yieldChart');
   if (!canvas) {
-    alert("Canvas not found – check HTML for id='yieldChart'");
+    console.error("Canvas #yieldChart not found");
     return;
   }
 
   const ctx = canvas.getContext('2d');
-  if (!ctx) {
-    alert("Canvas context failed");
-    return;
-  }
+  if (!ctx) return;
 
-  const metal = document.getElementById('metal')?.value.trim() || 'Base Catalyst';
+  const metal = document.getElementById('metal')?.value.trim() || 'Catalyst';
   const iterations = parseInt(document.getElementById('iterations')?.value) || 8;
 
-  // Destroy old chart safely
+  // Safe destroy previous chart
   if (window.myChart && typeof window.myChart.destroy === 'function') {
     window.myChart.destroy();
   }
 
-  // Mock data generation
-  const labels = Array.from({length: iterations}, (_, i) => `Iter ${i+1}`);
+  // Generate mock rising yield data
+  const labels = [];
   const data = [];
-  let yieldVal = 55 + Math.random() * 5;
-  for (let i = 0; i < iterations; i++) {
-    yieldVal += Math.random() * 3 + 1.5;
-    yieldVal = Math.min(yieldVal, 92);
+  let yieldVal = 58 + Math.random() * 4;
+  for (let i = 1; i <= iterations; i++) {
+    yieldVal += Math.random() * 3 + 1.2;
+    yieldVal = Math.min(yieldVal, 91);
+    labels.push(`Iter ${i}`);
     data.push(yieldVal.toFixed(1));
   }
 
-  try {
-    window.myChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: `${metal} Yield (%)`,
-          data: data,
-          borderColor: '#2e7d32',
-          backgroundColor: 'rgba(46, 125, 50, 0.2)',
-          borderWidth: 3,
-          tension: 0.4,
-          fill: true
-        }]
+  // Create stable chart
+  window.myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: `${metal} Yield (%)`,
+        data: data,
+        borderColor: '#2e7d32',
+        backgroundColor: 'rgba(46, 125, 50, 0.15)',
+        borderWidth: 3,
+        tension: 0.4,
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,       // Allows filling wrapper without forcing ratio
+      animation: { duration: 800 },     // Smooth but not bouncy
+      scales: {
+        y: {
+          min: 50,
+          max: 95,
+          title: { display: true, text: 'Yield (%)' }
+        }
       },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,   // Critical: allows height to fill wrapper
-        scales: {
-          y: { min: 50, max: 95, title: { display: true, text: 'Yield (%)' } }
-        },
-        plugins: { legend: { position: 'top' } }
+      plugins: {
+        legend: { position: 'top' }
       }
-    });
-  } catch (err) {
-    console.error("Chart failed:", err);
-    alert("Chart error – see console (F12)");
-  }
+    }
+  });
 }
