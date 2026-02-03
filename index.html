@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI-Assisted Catalyst Dashboard</title>
   <link rel="stylesheet" href="styles.css">
-  <!-- Reliable Chart.js CDN with version pin -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 </head>
 <body>
@@ -17,7 +16,6 @@
     <main>
       <section class="card">
         <h2>Literature Search (Mock – Backend Pending)</h2>
-        <p style="color:#666; font-size:0.9em; margin-bottom:10px;">Real API integration waiting on backend endpoint</p>
         <div class="input-group">
           <input type="text" id="searchQuery" placeholder="Search catalysts, metals, etc." class="modern-input">
           <button onclick="searchLiterature()" class="modern-button">Search</button>
@@ -32,7 +30,10 @@
           <input type="number" id="iterations" placeholder="Iterations" value="8" min="1" max="20" class="modern-input">
           <button onclick="runOptimization()" class="modern-button">Run Optimization</button>
         </div>
-        <canvas id="yieldChart"></canvas>
+        <!-- WRAPPER DIV – this stops the stretch -->
+        <div class="chart-wrapper">
+          <canvas id="yieldChart"></canvas>
+        </div>
       </section>
     </main>
   </div>
