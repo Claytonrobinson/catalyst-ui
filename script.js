@@ -1,4 +1,3 @@
-// Literature Search – Mock (your main task – swap fetch when backend ready)
 function searchLiterature() {
   const query = document.getElementById('searchQuery').value.trim();
   const results = document.getElementById('results');
@@ -10,55 +9,43 @@ function searchLiterature() {
 
   results.innerHTML = '<li>Loading... (mock mode)</li>';
 
-  // Simulate delay
   setTimeout(() => {
     results.innerHTML = `
-      <li><strong>Mock Result 1:</strong> Ni-W/ZrO₂ Catalyst for SAF (2024) - Bayesian opt improved yield</li>
-      <li><strong>Mock Result 2:</strong> Tungsten oxide with Ni promoter - Deoxygenation study</li>
-      <li><strong>Mock Result 3:</strong> AI screening for polymetallic catalysts - ${query} related</li>
+      <li><strong>Mock: AI-Screened Ni-W/ZrO₂ for SAF</strong> (2024) - Bayesian opt boosted C10+ yields</li>
+      <li><strong>Mock: Polymetallic Oxides Hydrodeoxygenation</strong> (2023) - Ni promoter on WO₃/ZrO₂</li>
+      <li><strong>Mock: ML for Catalyst Optimization</strong> (${query} match) - Higher heating value improvement</li>
     `;
   }, 800);
 }
 
-// Catalyst Optimization – Fixed version with error catching
 function runOptimization() {
-  console.log("runOptimization called");  // Debug: check if function runs
-
-  const metalInput = document.getElementById('metal');
-  const iterInput = document.getElementById('iterations');
   const canvas = document.getElementById('yieldChart');
-
   if (!canvas) {
-    console.error("Canvas element not found! Check <canvas id=\"yieldChart\">");
-    alert("Error: Chart canvas missing. Check HTML ID.");
+    alert("Canvas not found – check HTML for id='yieldChart'");
     return;
   }
 
   const ctx = canvas.getContext('2d');
   if (!ctx) {
-    console.error("Cannot get 2D context on canvas");
-    alert("Error: Canvas context failed.");
+    alert("Canvas context failed");
     return;
   }
 
-  const metal = metalInput?.value.trim() || 'Base Catalyst';
-  const iterations = parseInt(iterInput?.value) || 8;
-
-  console.log(`Optimizing for: ${metal}, ${iterations} iterations`);
+  const metal = document.getElementById('metal')?.value.trim() || 'Base Catalyst';
+  const iterations = parseInt(document.getElementById('iterations')?.value) || 8;
 
   // Destroy old chart safely
-  if (window.myChart instanceof Chart) {
+  if (window.myChart && typeof window.myChart.destroy === 'function') {
     window.myChart.destroy();
   }
 
-  // Generate mock data
-  const labels = [];
+  // Mock data generation
+  const labels = Array.from({length: iterations}, (_, i) => `Iter ${i+1}`);
   const data = [];
   let yieldVal = 55 + Math.random() * 5;
-  for (let i = 1; i <= iterations; i++) {
+  for (let i = 0; i < iterations; i++) {
     yieldVal += Math.random() * 3 + 1.5;
     yieldVal = Math.min(yieldVal, 92);
-    labels.push(`Iter ${i}`);
     data.push(yieldVal.toFixed(1));
   }
 
@@ -79,21 +66,15 @@ function runOptimization() {
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false,  // Helps with sizing
+        maintainAspectRatio: false,   // Critical: allows height to fill wrapper
         scales: {
-          y: {
-            beginAtZero: false,
-            min: 50,
-            max: 95,
-            title: { display: true, text: 'Yield (%)' }
-          }
-        }
+          y: { min: 50, max: 95, title: { display: true, text: 'Yield (%)' } }
+        },
+        plugins: { legend: { position: 'top' } }
       }
     });
-
-    console.log("Chart created successfully");
   } catch (err) {
-    console.error("Chart creation failed:", err);
-    alert("Chart error: " + err.message + "\nCheck console (F12).");
+    console.error("Chart failed:", err);
+    alert("Chart error – see console (F12)");
   }
 }
