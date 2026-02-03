@@ -17,7 +17,7 @@
     <main>
       <!-- Project Overview Card with images and explanation -->
       <section class="card overview">
-        <h2>Project Overview</h2>
+        <h2>Catalyst Dashboard Overview</h2>
         <p><strong>Purpose:</strong> This dashboard demonstrates AI/ML-assisted catalyst screening & optimization for producing sustainable aviation fuel (SAF) from cellulosic biomass (energy crops like switchgrass, miscanthus, poplar + agricultural waste). The two-step process: 1) Dilute acid hydrolysis in hot compressed water → soluble oligosaccharides. 2) Catalytic upgrading (hydrolysis, dehydration, hydrogenation, deoxygenation) using ZrO₂-supported WO₃ with Ni + secondary metal promoter. AI accelerates metal selection, synthesis params, and Bayesian optimization for higher yields, >C10 fraction, and heating value. Novelty: Fast, low-cost, aqueous, non-noble catalyst development.</p>
 
         <div class="images-grid">
@@ -29,15 +29,15 @@
           <img src="https://mediasvc.eurekalert.org/Api/v1/Multimedia/fc9a602b-8da7-41d7-9013-87cd392085ff/Rendition/low-res/Content/Public" alt="SAF from grass biomass concept">
         </div>
 
-        <p style="font-size: 0.9em; color: #555; margin-top: 15px;"><em>Images: Energy crops (switchgrass/miscanthus) and SAF production concepts – real feedstocks for your project.</em></p>
+        <p style="font-size: 0.9em; color: #555; margin-top: 15px;"><em>Images: Energy crops (switchgrass/miscanthus) and SAF production concepts – real feedstocks for the catalyst.</em></p>
       </section>
 
       <!-- Literature Search Section -->
       <section class="card">
         <h2>Literature Search (Mock – Backend Pending)</h2>
         <p class="section-note"><strong>What to do:</strong> Type keywords like "nickel", "tungsten", "zirconia", "bayesian optimization", "SAF catalyst", or "switchgrass". Click "Search".</p>
-        <p class="section-note"><strong>What happens:</strong> Shows loading spinner → displays mock "paper" results relevant to your project (filtered by your input). This section will connect to real backend API once Cameron provides the endpoint.</p>
-        <p class="section-note"><strong>Purpose:</strong> Simulates searching catalyst literature to inform AI screening (your sprint deliverable: input capture, loading/errors, display results).</p>
+        <p class="section-note"><strong>What happens:</strong> Shows loading spinner → displays mock "paper". This section will connect to real backend API once Cameron provides the endpoint.</p>
+        <p class="section-note"><strong>Purpose:</strong> Simulates searching catalyst literature to inform AI screening.</p>
 
         <div class="input-group">
           <input type="text" id="searchQuery" placeholder="e.g., nickel tungsten zirconia" class="modern-input">
@@ -48,10 +48,10 @@
 
       <!-- Catalyst Optimization Section -->
       <section class="card">
-        <h2>Catalyst Optimization (Mock – Stable)</h2>
+        <h2>Catalyst Optimization (Mock)</h2>
         <p class="section-note"><strong>What to do:</strong> Enter a metal/promoter (e.g., "Ni-Mo", "Ni-W", "Ni-Cu") and iterations (1–20, default 8). Click "Run Optimization".</p>
-        <p class="section-note"><strong>What happens:</strong> Shows "Optimizing..." → generates a rising yield curve (simulated Bayesian optimization progress). Chart updates stably in fixed box – no bouncing/shrinking.</p>
-        <p class="section-note"><strong>Purpose:</strong> Visualizes how AI/ML iteratively improves catalyst yield (higher % over iterations) – demo of your project's Bayesian loop for refining Ni-based polymetallic catalysts.</p>
+        <p class="section-note"><strong>What happens:</strong> Shows "Optimizing..." → generates a rising yield curve (simulated Bayesian optimization progress). Chart updates stably in fixed box.</p>
+        <p class="section-note"><strong>Purpose:</strong> Visualizes how AI/ML iteratively improves catalyst yield (higher % over iterations) – demo of Bayesian loop for refining Ni-based polymetallic catalysts.</p>
 
         <div class="input-group">
           <input type="text" id="metal" placeholder="e.g., Ni-Mo" class="modern-input">
