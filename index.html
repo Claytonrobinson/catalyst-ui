@@ -3,33 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catalyst Dashboard</title>
+  <title>AI-Assisted Catalyst Dashboard</title>
   <link rel="stylesheet" href="styles.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="dashboard">
     <header>
-      <h1>AI-Assisted Catalyst Dashboard</h1>
-      <p class="subtitle">Sustainable Aviation Fuel Optimization</p>
+      <h1>AI-Assisted Catalyst Development Dashboard</h1>
+      <p class="subtitle">Sustainable Aviation Fuel from Energy Crops & Agricultural Waste</p>
     </header>
     <main>
-      <section class="card">
-        <h2>Literature Search</h2>
-        <div class="input-group">
-          <input type="text" id="searchQuery" placeholder="Search catalysts, metals, etc." class="modern-input">
-          <button onclick="searchLiterature()" class="modern-button">Search</button>
+      <!-- New Project Overview Card -->
+      <section class="card overview">
+        <h2>Project Overview</h2>
+        <p>This senior design project develops AI-assisted catalytic systems for converting cellulosic biomass (switchgrass, miscanthus, poplar, agricultural wastes) into sustainable aviation fuel (SAF). The two-step process uses dilute acid hydrolysis followed by multi-reaction catalysis (hydrolysis, dehydration, hydrogenation, deoxygenation) with Brønsted/Lewis acid + Ni-based metal catalysts on ZrO₂ support. AI/ML (screening + Bayesian optimization) accelerates catalyst design to boost yields, >C10 fraction, and heating value. Novelty: Fast-tracked development of non-noble polymetallic catalysts in low-energy aqueous conditions.</p>
+        <div class="images-grid">
+          <img src="https://eu-images.contentstack.com/v3/assets/bltdd43779342bd9107/blta00289892d50994d/66705a537172c150a4f90213/0617F-3756A-1800x1012.jpg?width=1280&auto=webp&quality=80&disable=upscale" alt="Switchgrass energy crop field">
+          <img src="https://cals.ncsu.edu/horticultural-science/wp-content/uploads/sites/32/2024/07/harvesting-giant-miscanthus.jpg" alt="Miscanthus harvest for biofuel">
+          <img src="https://afdc.energy.gov/vite/assets/airport-fuel-supply-chain-BRIbvKM9.jpg" alt="Sustainable Aviation Fuel supply chain">
+          <img src="https://www.slideteam.net/media/catalog/product/cache/1280x720/s/u/sustainable_aviation_fuel_production_process_slide01.jpg" alt="SAF production process diagram">
         </div>
+      </section>
+
+      <section class="card">
+        <h2>Literature Search (Mock - Backend Pending)</h2>
+        <div class="input-group">
+          <input type="text" id="searchQuery" placeholder="e.g., nickel tungsten zirconia catalyst" class="modern-input">
+          <button onclick="searchLiterature()" id="searchBtn" class="modern-button">Search</button>
+        </div>
+        <div id="searchStatus" class="status"></div>
         <ul id="results" class="results-list"></ul>
       </section>
+
       <section class="card">
-        <h2>Catalyst Optimization</h2>
+        <h2>Catalyst Optimization (Mock)</h2>
         <div class="input-group">
-          <input type="text" id="metal" placeholder="Metal/Promoter" class="modern-input">
-          <input type="number" id="iterations" placeholder="Iterations" value="3" min="1" class="modern-input">
-          <button onclick="runOptimization()" class="modern-button">Optimize</button>
+          <input type="text" id="metal" placeholder="e.g., Ni-Mo, Ni-Cu" class="modern-input">
+          <input type="number" id="iterations" placeholder="Iterations" value="8" min="1" max="20" class="modern-input">
+          <button onclick="runOptimization()" id="optBtn" class="modern-button">Run Optimization</button>
         </div>
-        <canvas id="yieldChart" width="400" height="200"></canvas>
+        <div id="optStatus" class="status"></div>
+        <canvas id="yieldChart"></canvas>
       </section>
     </main>
   </div>
